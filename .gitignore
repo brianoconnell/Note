@@ -1,0 +1,10 @@
+
+/_ReSharper.Note
+/Note/bin
+/Note/obj
+/Note.Core/bin
+/Note.Core/obj
+/Note.Core.Test/bin
+/Note.Core.Test/obj
+*.user
+*.suo
