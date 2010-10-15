@@ -1,8 +1,6 @@
-using System;
 using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
-using NHibernate.Criterion;
 using Note.Core.Entities;
 
 namespace Note.Core.Repositories

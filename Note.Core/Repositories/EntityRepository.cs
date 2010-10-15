@@ -8,7 +8,7 @@ namespace Note.Core.Repositories
     {
         protected readonly ISession session;
 
-        public EntityRepository(ISession session)
+        protected EntityRepository(ISession session)
         {
             this.session = session;
         }

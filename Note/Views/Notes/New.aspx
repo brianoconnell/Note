@@ -8,10 +8,12 @@
 
     <h2>Add a note</h2>
     <% using(Html.BeginForm("new", "notes", FormMethod.Post)) {%>
+    <fieldset>
     <ul>
         <li><%= Html.LabelFor(x=>x.Title) %> <%=Html.TextBoxFor(note => note.Title) %></li>
         <li><%= Html.LabelFor(x=>x.Content) %> <%=Html.TextAreaFor(note => note.Content) %></li>
         </ul>
+        </fieldset>
         <input type="submit" />
     <%} %>
 </asp:Content>

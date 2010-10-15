@@ -12,11 +12,13 @@ namespace Note.Controllers
     {
         private readonly ICommandInvoker commandInvoker;
         private readonly INoteRepository noteRepository;
+        private readonly IUserRepository userRepository;
 
         [Inject]
-        public NotesController(ICommandInvoker commandInvoker, INoteRepository noteRepository)
+        public NotesController(ICommandInvoker commandInvoker, INoteRepository noteRepository, IUserRepository userRepository)
         {
             this.commandInvoker = commandInvoker;
+            this.userRepository = userRepository;
             this.noteRepository = noteRepository;
         }
 
@@ -31,8 +33,18 @@ namespace Note.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult New(NoteNewViewModel model)
         {
-            commandInvoker.Execute(new AddNewNoteCommand(model.Title, model.Content, Guid.NewGuid(), DateTime.Now));
-            return RedirectToAction("new");
+            var user = userRepository.GetByUsername(User.Identity.Name);
+            commandInvoker.Execute(new AddNewNoteCommand(model.Title, model.Content, user.Id, DateTime.Now));
+            return RedirectToAction("list");
+        }
+
+        [Authorize]
+        public ActionResult List()
+        {
+            var model = new ListNotesViewModel();
+            var user = userRepository.GetByUsername(User.Identity.Name);
+            model.Notes = noteRepository.GetByOwnerId(user.Id);
+            return View(model);
         }
     }
 }

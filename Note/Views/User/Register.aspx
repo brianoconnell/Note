@@ -10,14 +10,17 @@
 
     <%using (Html.BeginForm())
       {%>
+        <fieldset>
         <ul>
-            <li><%=Html.LabelFor(x =>x.Username) %> <%=Html.TextBoxFor(x => x.Username) %></li>
-            <li><%= Html.LabelFor(x => x.Password) %> <%=Html.PasswordFor(x=>x.Password) %></li>
-            <li><%= Html.LabelFor(x => x.PasswordRepeat) %> <%=Html.PasswordFor(x => x.PasswordRepeat) %></li>
-            <li><%= Html.LabelFor(x => x.Email) %> <%= Html.TextBoxFor(x => x.Email) %></li>
+            <li><%=Html.LabelFor(x =>x.Username) %> <%=Html.TextBoxFor(x => x.Username) %> <%= Html.ValidationMessageFor(x =>x.Username) %></li>
+            <li><%= Html.LabelFor(x => x.Password) %> <%=Html.PasswordFor(x=>x.Password) %> <%= Html.ValidationMessageFor(x => x.Password)%></li>
+            <li><%= Html.LabelFor(x => x.PasswordRepeat) %> <%=Html.PasswordFor(x => x.PasswordRepeat) %> <%= Html.ValidationMessageFor(x => x.PasswordRepeat)%></li>
+            <li><%= Html.LabelFor(x => x.Email) %> <%= Html.TextBoxFor(x => x.Email) %> <%= Html.ValidationMessageFor(x => x.Email)%></li>
         </ul>
-
-        <input type="submit" />
+        </fieldset>
+        <fieldset class="submit">
+        <input type="submit" class="submit" />
+        </fieldset>
     <%
       }%>
 </asp:Content>

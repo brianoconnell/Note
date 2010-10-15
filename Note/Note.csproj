@@ -90,6 +90,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="ViewModels\ListNotesViewModel.cs" />
     <Compile Include="ViewModels\UserRegisterViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -105,6 +106,7 @@
       <DependentUpon>NoteDb.mdf</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="Views\Notes\List.aspx" />
     <Content Include="Views\Notes\New.aspx" />
     <Content Include="Views\User\Register.aspx" />
     <Content Include="Views\User\SignIn.aspx" />

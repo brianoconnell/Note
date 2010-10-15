@@ -184,11 +184,20 @@ ul#menu li.selected a
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 
+label
+{
+    float:left;
+    width:10em;
+    margin-right: 1em;
+}
+
 fieldset 
 {
-    margin: 1em 0;
-    padding: 1em;
-    border: 1px solid #CCC;
+    clear:left;
+    width:100%;
+    margin: 0 0 1.5em 0;
+    padding: 0;
+    border-style:none;
 }
 
 fieldset p 
@@ -201,6 +210,25 @@ legend
     font-size: 1.1em;
     font-weight: 600;
     padding: 2px 4px 8px 4px;
+}
+
+fieldset ul
+{
+    padding: 1em 1em 0 1em;
+    list-style: none;
+}
+
+fieldset li
+{
+    padding-bottom: 1em;
+}
+
+fieldset .submit
+{
+    float:none;
+    width:auto;
+    border: 0 none;
+    margin-left:1em;
 }
 
 input[type="text"] 
