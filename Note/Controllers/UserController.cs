@@ -33,7 +33,7 @@ namespace Note.Controllers
                     return Redirect(returnUrl);
                 }
 
-                return RedirectToAction("New", "Notes");
+                return RedirectToAction("list", "notes");
             }
 
             ModelState.AddModelError("", "The username or password provided is incorrect.");
@@ -60,7 +60,7 @@ namespace Note.Controllers
                 if (status == MembershipCreateStatus.Success)
                 {
                     ViewData["RegistrationSuccessMessage"] = "You have registered. Hooray for you!";
-                    return RedirectToAction("List", "Notes");
+                    return RedirectToAction("list", "notes");
                 }
             }
             // Something has gone wrong if we are here so go back to the registration page.

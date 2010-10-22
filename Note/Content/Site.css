@@ -243,6 +243,12 @@ input[type="password"]
     border: 1px solid #CCC;
 }
 
+textarea#Title
+{
+    width:600px;
+    height:300px;
+}
+
 /* TABLE
 ----------------------------------------------------------*/
 

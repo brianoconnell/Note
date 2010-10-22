@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Note", "Note\Note.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Note.Core.Test", "Note.Core.Test\Note.Core.Test.csproj", "{F06F7232-DEF5-4218-A1AA-A79E238CE6CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Note.Test", "Note.Test\Note.Test.csproj", "{F56D6E93-085B-4223-81CA-68366EE108E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{F06F7232-DEF5-4218-A1AA-A79E238CE6CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F06F7232-DEF5-4218-A1AA-A79E238CE6CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F06F7232-DEF5-4218-A1AA-A79E238CE6CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F56D6E93-085B-4223-81CA-68366EE108E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F56D6E93-085B-4223-81CA-68366EE108E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F56D6E93-085B-4223-81CA-68366EE108E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F56D6E93-085B-4223-81CA-68366EE108E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
