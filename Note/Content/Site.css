@@ -243,10 +243,15 @@ input[type="password"]
     border: 1px solid #CCC;
 }
 
-textarea#Title
+textarea#Content
 {
     width:600px;
     height:300px;
+}
+
+input[type="text"]#Title
+{
+    width: 600px;
 }
 
 /* TABLE

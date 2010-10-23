@@ -4,6 +4,7 @@ using Ninject;
 using Note.Core;
 using Note.Core.Commands;
 using Note.Core.Repositories;
+using Note.Filters;
 using Note.ViewModels;
 
 namespace Note.Controllers
@@ -24,6 +25,7 @@ namespace Note.Controllers
 
         [Authorize]
         [AcceptVerbs(HttpVerbs.Get)]
+        [CompactFilter]
         public ActionResult New()
         {
             return View(new NoteNewViewModel());
@@ -31,6 +33,7 @@ namespace Note.Controllers
 
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
+        [CompactFilter]
         public ActionResult New(NoteNewViewModel model)
         {
             var user = userRepository.GetByUsername(User.Identity.Name);
@@ -39,6 +42,7 @@ namespace Note.Controllers
         }
 
         [Authorize]
+        [CompactFilter]
         public ActionResult List()
         {
             var model = new ListNotesViewModel();

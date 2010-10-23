@@ -4,23 +4,13 @@
     List
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        Your Notes</h2>
+    <h2>Your Notes</h2>
     <% if (Model.Notes != null && Model.Notes.Count > 0)
        {%>
-    <ul>
-        <% foreach (var note in Model.Notes)
-           {%>
-        <li>
-            <%= note.Title%></li>
-        <%
-            }%>
+    <ul><% foreach (var note in Model.Notes){%>
+        <li><%= note.Title%></li><%}%>
     </ul>
     <%}
        else
-       {%>
-    You have no notes.
-    <%=Html.ActionLink("Add one now", "new","notes") %>
-    <%
-        }%>
+       {%>You have no notes. <%=Html.ActionLink("Add one now", "new","notes") %><%}%>
 </asp:Content>

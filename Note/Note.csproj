@@ -90,6 +90,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Filters\CompactFilter.cs" />
+    <Compile Include="Filters\WhitespaceFilter.cs" />
     <Compile Include="ViewModels\ListNotesViewModel.cs" />
     <Compile Include="ViewModels\UserRegisterViewModel.cs" />
     <Compile Include="Global.asax.cs">
