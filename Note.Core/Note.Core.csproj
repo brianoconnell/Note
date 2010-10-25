@@ -75,10 +75,12 @@
     <Compile Include="CommandHandlers\AddNewNoteCommandHandler.cs" />
     <Compile Include="CommandHandlers\AddNewUserCommandHandler.cs" />
     <Compile Include="CommandHandlers\RemoveNoteCommandHandler.cs" />
+    <Compile Include="CommandHandlers\EditNoteCommandHandler.cs" />
     <Compile Include="CommandInvoker.cs" />
     <Compile Include="Commands\AddNewNoteCommand.cs" />
     <Compile Include="Commands\AddNewUserCommand.cs" />
     <Compile Include="Commands\RemoveNoteCommand.cs" />
+    <Compile Include="Commands\EditNoteCommand.cs" />
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Note.cs" />
     <Compile Include="Entities\User.cs" />

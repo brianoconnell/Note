@@ -27,5 +27,10 @@ namespace Note.Core.Repositories
         {
             this.session.Delete(entity);
         }
+
+        public void Update(TEntity user)
+        {
+            session.Update(user);
+        }
     }
 }

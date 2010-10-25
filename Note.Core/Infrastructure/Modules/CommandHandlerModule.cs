@@ -11,6 +11,7 @@ namespace Note.Core.Infrastructure.Modules
             Bind<ICommandHandler<AddNewNoteCommand>>().To<AddNewNoteCommandHandler>();
             Bind<ICommandHandler<RemoveNoteCommand>>().To<RemoveNoteCommandHandler>();
             Bind<ICommandHandler<AddNewUserCommand>>().To<AddNewUserCommandHandler>();
+            Bind<ICommandHandler<EditNoteCommand>>().To<EditNoteCommandHandler>();
         }
     }
 }

@@ -44,5 +44,17 @@ namespace Note.Core.Test
 
             mockSession.Verify(x => x.Delete(note), Times.Once());
         }
+
+        [Test]
+        public void NoteIsUpdatedInSessionWhenUpdateIsCalled()
+        {
+            var mockSession = new Mock<ISession>();
+            NoteRepository noteRepository = new NoteRepository(mockSession.Object);
+
+            Entities.Note note = new Entities.Note();
+            noteRepository.Update(note);
+
+            mockSession.Verify(x => x.Update(note), Times.Once());
+        }
     }
 }

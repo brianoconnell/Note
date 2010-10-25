@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="AddNewNoteCommandHandlerTests.cs" />
     <Compile Include="CommandInvokerTests.cs" />
+    <Compile Include="EditNoteCommandHandlerTests.cs" />
     <Compile Include="NoteRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoveNoteCommandHandlerTests.cs" />

@@ -16,13 +16,13 @@ namespace Note.Controllers
             this.membershipService = membershipService;
         }
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpGet]
         public ActionResult SignIn()
         {
             return View(new UserSignInViewModel());
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         public ActionResult SignIn(UserSignInViewModel model, string returnUrl)
         {
             if (membershipService.ValidateUser(model.Username, model.Password))
@@ -40,12 +40,13 @@ namespace Note.Controllers
             return View(model);
         }
 
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpGet]
         public ActionResult Register()
         {
             return View(new UserRegisterViewModel());
         }
 
+        [HttpPost]
         public ActionResult Register(UserRegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -67,6 +68,7 @@ namespace Note.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult SignOut()
         {
             authenticationService.SignOut();

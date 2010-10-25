@@ -17,7 +17,7 @@ namespace Note.Test
         [Test]
         public void PostToNewShouldInvokeAddNewNoteCommand()
         {
-            var noteNewViewModel = new NoteNewViewModel
+            var noteNewViewModel = new EditNoteViewModel
             {
                 Content = "This is some content",
                 Title = "This is the title"

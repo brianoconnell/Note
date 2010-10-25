@@ -18,5 +18,10 @@ namespace Note.Core.Repositories
         {
             return session.Linq<Entities.Note>().Where(note => note.OwnerId == userId).ToList();
         }
+
+        public Entities.Note GetNote(Guid noteId)
+        {
+            return session.Linq<Entities.Note>().SingleOrDefault(note => note.Id == noteId);
+        }
     }
 }

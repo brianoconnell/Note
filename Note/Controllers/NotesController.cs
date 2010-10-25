@@ -24,17 +24,17 @@ namespace Note.Controllers
         }
 
         [Authorize]
-        [AcceptVerbs(HttpVerbs.Get)]
+        [HttpGet]
         [CompactFilter]
         public ActionResult New()
         {
-            return View(new NoteNewViewModel());
+            return View(new EditNoteViewModel());
         }
 
         [Authorize]
-        [AcceptVerbs(HttpVerbs.Post)]
+        [HttpPost]
         [CompactFilter]
-        public ActionResult New(NoteNewViewModel model)
+        public ActionResult New(EditNoteViewModel model)
         {
             var user = userRepository.GetByUsername(User.Identity.Name);
             commandInvoker.Execute(new AddNewNoteCommand(model.Title, model.Content, user.Id, DateTime.Now));
@@ -42,6 +42,7 @@ namespace Note.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         [CompactFilter]
         public ActionResult List()
         {
@@ -49,6 +50,51 @@ namespace Note.Controllers
             var user = userRepository.GetByUsername(User.Identity.Name);
             model.Notes = noteRepository.GetByOwnerId(user.Id);
             return View(model);
+        }
+
+        [Authorize]
+        [HttpGet]
+        [CompactFilter]
+        public ActionResult Edit(string noteId)
+        {
+            Guid noteGuid = Guid.Parse(noteId);
+            // Make sure the note belongs to this user
+            Core.Entities.Note note = noteRepository.GetNote(noteGuid);
+            if(note == null)
+            {
+                return RedirectToAction("list");
+            }
+
+            var user = userRepository.GetByUsername(User.Identity.Name);
+            if(note.OwnerId != user.Id)
+            {
+                return RedirectToAction("list");
+            }
+
+            return View(new EditNoteViewModel{Title = note.Title, Content = note.Content});
+        }
+
+        [Authorize]
+        [HttpPost]
+        [CompactFilter]
+        public ActionResult Edit(EditNoteViewModel model, string noteId)
+        {
+            Guid noteGuid = Guid.Parse(noteId);
+            Core.Entities.Note note = noteRepository.GetNote(noteGuid);
+            if(note == null)
+            {
+                return RedirectToAction("list");
+            }
+
+            var user = userRepository.GetByUsername(User.Identity.Name);
+            if(note.OwnerId != user.Id)
+            {
+                return RedirectToAction("list");
+            }
+
+            commandInvoker.Execute(new EditNoteCommand(model.Title, model.Content, noteGuid));
+
+            return RedirectToAction("list");
         }
     }
 }

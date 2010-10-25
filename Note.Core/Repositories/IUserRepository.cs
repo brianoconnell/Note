@@ -6,6 +6,5 @@ namespace Note.Core.Repositories
     {
         User GetByUsername(string username);
         User GetByEmail(string email);
-        void Update(User user);
     }
 }

@@ -27,7 +27,7 @@ namespace Note.Core.Infrastructure
         private void InitSessionManager()
         {
             sessionFactory = Fluently.Configure()
-                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(c => c.FromConnectionStringWithKey("NotesDb")))
+                .Database(MsSqlConfiguration.MsSql2008.ConnectionString(c => c.FromConnectionStringWithKey("NotesDb")).ShowSql())
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Entities.IEntity>())
                 .BuildSessionFactory();
         }

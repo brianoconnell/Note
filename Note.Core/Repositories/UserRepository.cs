@@ -20,10 +20,5 @@ namespace Note.Core.Repositories
         {
             return session.Linq<User>().SingleOrDefault(user => user.Email == email);
         }
-
-        public void Update(User user)
-        {
-            session.Update(user);
-        }
     }
 }

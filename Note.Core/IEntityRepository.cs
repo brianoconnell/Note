@@ -8,5 +8,6 @@ namespace Note.Core
         TEntity Load(Guid id);
         void Add(TEntity entity);
         void Remove(TEntity entity);
+        void Update(TEntity user);
     }
 }
