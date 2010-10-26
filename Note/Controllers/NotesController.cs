@@ -28,7 +28,7 @@ namespace Note.Controllers
         [CompactFilter]
         public ActionResult New()
         {
-            return View(new EditNoteViewModel());
+            return View("new", new EditNoteViewModel());
         }
 
         [Authorize]
@@ -49,7 +49,7 @@ namespace Note.Controllers
             var model = new ListNotesViewModel();
             var user = userRepository.GetByUsername(User.Identity.Name);
             model.Notes = noteRepository.GetByOwnerId(user.Id);
-            return View(model);
+            return View("list", model);
         }
 
         [Authorize]
@@ -71,7 +71,7 @@ namespace Note.Controllers
                 return RedirectToAction("list");
             }
 
-            return View(new EditNoteViewModel{Title = note.Title, Content = note.Content});
+            return View("edit", new EditNoteViewModel{Title = note.Title, Content = note.Content});
         }
 
         [Authorize]
