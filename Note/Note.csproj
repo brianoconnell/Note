@@ -111,8 +111,13 @@
     <Content Include="App_Data\NoteDb_log.ldf">
       <DependentUpon>NoteDb.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\notes.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.4.3.js" />
+    <Content Include="Scripts\jquery-1.4.3.min.js" />
+    <Content Include="Scripts\notes.js" />
     <Content Include="Views\Notes\Edit.aspx" />
+    <Content Include="Views\Notes\Index.aspx" />
     <Content Include="Views\Notes\List.aspx" />
     <Content Include="Views\Notes\New.aspx" />
     <Content Include="Views\User\Register.aspx" />
@@ -156,6 +161,9 @@
       <Project>{D0FF2D27-58CD-448D-A0E7-756D5A3A91EB}</Project>
       <Name>Note.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Notes.master" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

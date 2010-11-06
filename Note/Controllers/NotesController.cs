@@ -23,6 +23,16 @@ namespace Note.Controllers
             this.noteRepository = noteRepository;
         }
 
+
+        [Authorize]
+        [HttpGet]
+        [CompactFilter]
+        public ActionResult Index()
+        {
+            return View("index");
+        }
+
+
         [Authorize]
         [HttpGet]
         [CompactFilter]
@@ -58,7 +68,7 @@ namespace Note.Controllers
         public ActionResult Edit(string noteId)
         {
             Guid noteGuid = Guid.Parse(noteId);
-            // Make sure the note belongs to this user
+            // Make sure the Note belongs to this user
             Core.Entities.Note note = noteRepository.GetNote(noteGuid);
             if(note == null)
             {
@@ -95,6 +105,17 @@ namespace Note.Controllers
             commandInvoker.Execute(new EditNoteCommand(model.Title, model.Content, noteGuid));
 
             return RedirectToAction("list");
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult GetAllJson()
+        {
+             var model = new ListNotesViewModel();
+            var user = userRepository.GetByUsername(User.Identity.Name);
+            model.Notes = noteRepository.GetByOwnerId(user.Id);
+
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
     }
 }

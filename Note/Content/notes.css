@@ -1,0 +1,35 @@
+﻿body 
+{
+    margin:0px;
+    padding:0px;
+    border:0px;
+}
+
+#page
+{
+    width:80%;
+    min-width:800px;
+    margin:2em;
+    padding:1em;
+}
+#noteslist
+{
+    width:40%;
+    float:left;
+}
+
+#note
+{
+    width:60%;
+    float:right;
+}
+#header
+{
+    width:100%;
+    float:left;
+}
+#footer
+{
+    width:100%;
+    float:left;
+}

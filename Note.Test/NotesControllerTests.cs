@@ -190,6 +190,68 @@ namespace Note.Test
             Assert.AreEqual("Test Content", model.Content);
         }
 
+        [Test]
+        public void PostToEditShouldRedirectToListForNonExistantNote()
+        {
+            var mockCommandInvoker = new Mock<ICommandInvoker>();
+            var mockUserRepository = new Mock<IUserRepository>();
+            var mockNoteRepository = new Mock<INoteRepository>();
+            mockNoteRepository.Setup(x => x.GetNote(It.IsAny<Guid>())).Returns((Core.Entities.Note)null);
+            var notesController = new NotesController(mockCommandInvoker.Object, mockNoteRepository.Object, mockUserRepository.Object);
+            var result = notesController.Edit(null, Guid.NewGuid().ToString()) as RedirectToRouteResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("list", result.RouteValues["action"]);
+        }
+
+        [Test]
+        public void PostToEditShouldRedirectToListWhenCurrentUserDoesNotOwnSpecifiedNote()
+        {
+            var mockCommandInvoker = new Mock<ICommandInvoker>();
+            var mockUserRepository = new Mock<IUserRepository>();
+            var mockNoteRepository = new Mock<INoteRepository>();
+
+            Guid noteId = Guid.NewGuid();
+            Guid ownerId = Guid.NewGuid();
+            mockNoteRepository.Setup(x => x.GetNote(noteId)).Returns(new Core.Entities.Note { Id = noteId, OwnerId = ownerId });
+            mockUserRepository.Setup(x => x.GetByUsername("boco")).Returns(new User { Id = ownerId });
+
+            var notesController = new NotesController(mockCommandInvoker.Object, mockNoteRepository.Object,
+                                                      mockUserRepository.Object);
+            var result = notesController.Edit(null, Guid.NewGuid().ToString()) as RedirectToRouteResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("list", result.RouteValues["action"]);
+        }
+
+        [Test]
+        public void PostToEditShouldExecuteEditNoteCommandForTheSpecifiedNoteAndRedirectsToList()
+        {
+            var mockCommandInvoker = new Mock<ICommandInvoker>();
+            var mockUserRepository = new Mock<IUserRepository>();
+            var mockNoteRepository = new Mock<INoteRepository>();
+
+            Guid noteId = Guid.NewGuid();
+            Guid ownerId = Guid.NewGuid();
+            var note = new Core.Entities.Note
+                                          {
+                                              Content = "Test Content",
+                                              Title = "Test Title",
+                                              Id = noteId,
+                                              OwnerId = ownerId
+                                          };
+            mockNoteRepository.Setup(x => x.GetNote(noteId)).Returns(note);
+            mockUserRepository.Setup(x => x.GetByUsername("boco")).Returns(new User { Id = ownerId });
+            var notesController = GetNotesController(mockCommandInvoker, mockNoteRepository,
+                                                      mockUserRepository);
+
+            var editNoteViewModel = new EditNoteViewModel { Content = "New Content", Title = "New Title" };
+            var result = notesController.Edit(editNoteViewModel, noteId.ToString()) as RedirectToRouteResult;
+            Assert.IsNotNull(result);
+            Assert.AreEqual("list", result.RouteValues["action"]);
+            mockCommandInvoker.Verify(x => x.Execute(It.Is<EditNoteCommand>(enc => enc.Content == editNoteViewModel.Content && enc.Title == editNoteViewModel.Title && enc.NoteId == noteId)), Times.Once());
+        }
+
         private static NotesController GetNotesController(Mock<ICommandInvoker> mockCommandInvoker, Mock<INoteRepository> mockNoteRepository, Mock<IUserRepository> mockUserRepository)
         {
             var mockHttpContext = new Mock<ControllerContext>();
