@@ -4,11 +4,12 @@
 function simpleRequest() {
     jQuery.getJSON('getalljson', function (data) {
         $.each(data.Notes, function () {
-            var newDiv = $("<div>").append(this.Title).click(this, function (event) {
-                $('#title').empty().append(event.data.Title);
-                $('#content').empty().append(event.data.Content);
+            var newDiv = $("<li>").append(this.Title).click(this, function (event) {
+                $('#notetitle').empty().append(event.data.Title);
+                $('#notetextarea').val(event.data.Content);
             });
-            $('#noteslist').append(newDiv);
+            newDiv.addClass('ui-widget-content');
+            $('#selectable').append(newDiv);
         });
     });
 }

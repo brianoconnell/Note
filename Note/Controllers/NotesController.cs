@@ -26,7 +26,7 @@ namespace Note.Controllers
 
         [Authorize]
         [HttpGet]
-        [CompactFilter]
+        //[CompactFilter]
         public ActionResult Index()
         {
             return View("index");
@@ -70,18 +70,18 @@ namespace Note.Controllers
             Guid noteGuid = Guid.Parse(noteId);
             // Make sure the Note belongs to this user
             Core.Entities.Note note = noteRepository.GetNote(noteGuid);
-            if(note == null)
+            if (note == null)
             {
                 return RedirectToAction("list");
             }
 
             var user = userRepository.GetByUsername(User.Identity.Name);
-            if(note.OwnerId != user.Id)
+            if (note.OwnerId != user.Id)
             {
                 return RedirectToAction("list");
             }
 
-            return View("edit", new EditNoteViewModel{Title = note.Title, Content = note.Content});
+            return View("edit", new EditNoteViewModel { Title = note.Title, Content = note.Content });
         }
 
         [Authorize]
@@ -91,13 +91,13 @@ namespace Note.Controllers
         {
             Guid noteGuid = Guid.Parse(noteId);
             Core.Entities.Note note = noteRepository.GetNote(noteGuid);
-            if(note == null)
+            if (note == null)
             {
                 return RedirectToAction("list");
             }
 
             var user = userRepository.GetByUsername(User.Identity.Name);
-            if(note.OwnerId != user.Id)
+            if (note.OwnerId != user.Id)
             {
                 return RedirectToAction("list");
             }
@@ -111,7 +111,7 @@ namespace Note.Controllers
         [HttpGet]
         public ActionResult GetAllJson()
         {
-             var model = new ListNotesViewModel();
+            var model = new ListNotesViewModel();
             var user = userRepository.GetByUsername(User.Identity.Name);
             model.Notes = noteRepository.GetByOwnerId(user.Id);
 
