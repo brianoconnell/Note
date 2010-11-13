@@ -1,15 +1,44 @@
 ﻿/// <reference path="jquery-1.4.1-vsdoc.js" />
+var notes;
 
-// Makes a simple request to retriece all notes for the current user.
-function simpleRequest() {
+
+// Makes a simple request to retrieve all notes for the current user.
+function onLoad() {
     jQuery.getJSON('getalljson', function (data) {
-        $.each(data.Notes, function () {
-            var newDiv = $("<li>").append(this.Title).click(this, function (event) {
-                $('#notetitle').empty().append(event.data.Title);
-                $('#notetextarea').val(event.data.Content);
+        notes = data.Notes;
+        $.each(notes, function () {
+            var listItem = $('<li>').append(this.Title).click(this.Id, function (event) {
+                populateNoteDetails(event.data);
             });
-            newDiv.addClass('ui-widget-content');
-            $('#selectable').append(newDiv);
+            listItem.addClass('ui-widget-content');
+            $('#selectable').append(listItem);
         });
     });
+}
+
+function populateNoteDetails(noteId) {
+    $.each(notes, function () {
+        if (this.Id === noteId) {
+            $('#notetitle').empty().append(this.Title);
+            $('#notetextarea').val(this.Content);
+            $('#noteid').val(this.Id);
+        }
+    });
+}
+
+function postNoteUpdate() {
+    var noteId = $('#noteid').val();
+    var noteContent = $('#notetextarea').val();
+    var noteTitle = $('#notetitle').text();
+    var editNoteModel = {
+        "model.Title": noteTitle,
+        "model.Content": noteContent
+    };
+    $.each(notes, function () {
+        if (this.Id == noteId) {
+            this.Title = noteTitle;
+            this.Content = noteContent;
+        }
+    });
+    jQuery.post('updatenotejson?noteId=' + noteId, editNoteModel, function (result) { }, 'json');
 }

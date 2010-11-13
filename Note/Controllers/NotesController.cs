@@ -23,15 +23,13 @@ namespace Note.Controllers
             this.noteRepository = noteRepository;
         }
 
-
         [Authorize]
         [HttpGet]
-        //[CompactFilter]
+        [CompactFilter]
         public ActionResult Index()
         {
             return View("index");
         }
-
 
         [Authorize]
         [HttpGet]
@@ -116,6 +114,14 @@ namespace Note.Controllers
             model.Notes = noteRepository.GetByOwnerId(user.Id);
 
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult UpdateNoteJson(EditNoteViewModel model, string noteId)
+        {
+            commandInvoker.Execute(new EditNoteCommand(model.Title, model.Content, Guid.Parse(noteId)));
+            return Json(null);
         }
     }
 }

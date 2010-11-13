@@ -19,12 +19,14 @@
                     <div id="notecontent">
                         <textarea rows="10" cols="100" id="notetextarea"></textarea>
                     </div>
+                    <input type="hidden" id="noteid"/>
+                    <input type="button" onclick="postNoteUpdate();" value="Save" />
                 </div>
             </div>
             <div id="notefooter">Footer</div>
         </div>
     </div>
 
-    <script type="text/javascript">$(function(){simpleRequest();});</script>
+    <script type="text/javascript">$(function () { onLoad(); });</script>
     <script type="text/javascript">$(function () { $('#selectable').selectable(); });</script>
 </asp:Content>

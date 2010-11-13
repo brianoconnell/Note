@@ -62,6 +62,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -95,6 +96,7 @@
     <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\CompactFilter.cs" />
+    <Compile Include="Filters\ObjectFilter.cs" />
     <Compile Include="Filters\WhitespaceFilter.cs" />
     <Compile Include="ViewModels\EditNoteViewModel.cs" />
     <Compile Include="ViewModels\ListNotesViewModel.cs" />
