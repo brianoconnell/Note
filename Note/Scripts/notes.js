@@ -34,11 +34,18 @@ function postNoteUpdate() {
         "model.Title": noteTitle,
         "model.Content": noteContent
     };
-    $.each(notes, function () {
-        if (this.Id == noteId) {
-            this.Title = noteTitle;
-            this.Content = noteContent;
+    
+    jQuery.post('updatenotejson?noteId=' + noteId, editNoteModel, function (result) {
+        if (result.Error) {
+            // Display an error message somewhere.
         }
-    });
-    jQuery.post('updatenotejson?noteId=' + noteId, editNoteModel, function (result) { }, 'json');
+        else {
+            $.each(notes, function () {
+                if (this.Id == noteId) {
+                    this.Title = noteTitle;
+                    this.Content = noteContent;
+                }
+            });
+        }
+    }, 'json');
 }

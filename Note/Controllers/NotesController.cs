@@ -120,6 +120,19 @@ namespace Note.Controllers
         [HttpPost]
         public ActionResult UpdateNoteJson(EditNoteViewModel model, string noteId)
         {
+            Guid noteGuid = Guid.Parse(noteId);
+            var note = noteRepository.GetNote(noteGuid);
+            if(note == null)
+            {
+                return Json(new {Error = "The note does not exist"});
+            }
+
+            var user = userRepository.GetByUsername(User.Identity.Name);
+            if(note.OwnerId != user.Id)
+            {
+                return Json(new {Error = "You do not own the note you are trying to modify."});
+            }
+
             commandInvoker.Execute(new EditNoteCommand(model.Title, model.Content, Guid.Parse(noteId)));
             return Json(null);
         }
