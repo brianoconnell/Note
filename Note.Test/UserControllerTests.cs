@@ -19,6 +19,7 @@ namespace Note.Test
         {
             mockMembershipService = new Mock<IMembershipService>();
             mockAuthenticationService = new Mock<IAuthenticationService>();
+            mockUserRepository = new Mock<IUserRepository>();
         }
 
         [Test]
@@ -48,7 +49,7 @@ namespace Note.Test
         }
 
         [Test]
-        public void SignInShouldRedirectToNotesListWhenAuthenticationIsSuccessfulAndReturnUrlIsNotSpecified()
+        public void SignInShouldRedirectToNotesIndexWhenAuthenticationIsSuccessfulAndReturnUrlIsNotSpecified()
         {
             mockMembershipService.Setup(ms => ms.ValidateUser(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
             var userController = new UserController(mockAuthenticationService.Object, mockMembershipService.Object, mockUserRepository.Object);
@@ -57,7 +58,7 @@ namespace Note.Test
             var result = userController.SignIn(model, null) as RedirectToRouteResult;
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("list", result.RouteValues["action"]);
+            Assert.AreEqual("index", result.RouteValues["action"]);
             Assert.AreEqual("notes", result.RouteValues["controller"]);
         }
 

@@ -136,7 +136,6 @@
     <Content Include="Scripts\notes.js" />
     <Content Include="Views\Notes\Edit.aspx" />
     <Content Include="Views\Notes\Index.aspx" />
-    <Content Include="Views\Notes\List.aspx" />
     <Content Include="Views\Notes\New.aspx" />
     <Content Include="Views\User\List.aspx" />
     <Content Include="Views\User\Register.aspx" />

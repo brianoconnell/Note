@@ -48,18 +48,7 @@ namespace Note.Controllers
         {
             var user = userRepository.GetByUsername(User.Identity.Name);
             commandInvoker.Execute(new AddNewNoteCommand(model.Title, model.Content, user.Id, DateTime.Now));
-            return RedirectToAction("list");
-        }
-
-        [Authorize]
-        [HttpGet]
-        [CompactFilter]
-        public ActionResult List()
-        {
-            var model = new ListNotesViewModel();
-            var user = userRepository.GetByUsername(User.Identity.Name);
-            model.Notes = user.Notes;
-            return View("list", model);
+            return RedirectToAction("index");
         }
 
         [Authorize]
@@ -73,7 +62,7 @@ namespace Note.Controllers
             var note = user.Notes.SingleOrDefault(x => x.Id == noteGuid);
             if( note == null)
             {
-                return RedirectToAction("list");
+                return RedirectToAction("index");
             }
            
             return View("edit", new EditNoteViewModel { Title = note.Title, Content = note.Content });
@@ -88,18 +77,18 @@ namespace Note.Controllers
             Core.Entities.Note note = noteRepository.GetNote(noteGuid);
             if (note == null)
             {
-                return RedirectToAction("list");
+                return RedirectToAction("index");
             }
 
             var user = userRepository.GetByUsername(User.Identity.Name);
             if (note.OwnerId != user.Id)
             {
-                return RedirectToAction("list");
+                return RedirectToAction("index");
             }
 
             commandInvoker.Execute(new EditNoteCommand(model.Title, model.Content, noteGuid));
 
-            return RedirectToAction("list");
+            return RedirectToAction("index");
         }
 
         [Authorize]
