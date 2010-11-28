@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Note.Core.Entities
 {
@@ -9,5 +10,6 @@ namespace Note.Core.Entities
         public virtual string PasswordHash { get; set; }
         public virtual string PasswordSalt { get; set;}
         public virtual string Email{ get; set;}
+        public virtual IList<Note> Notes { get; set; }
     }
 }

@@ -100,6 +100,7 @@
     <Compile Include="Filters\WhitespaceFilter.cs" />
     <Compile Include="ViewModels\EditNoteViewModel.cs" />
     <Compile Include="ViewModels\ListNotesViewModel.cs" />
+    <Compile Include="ViewModels\ListUsersViewModel.cs" />
     <Compile Include="ViewModels\UserRegisterViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -137,6 +138,7 @@
     <Content Include="Views\Notes\Index.aspx" />
     <Content Include="Views\Notes\List.aspx" />
     <Content Include="Views\Notes\New.aspx" />
+    <Content Include="Views\User\List.aspx" />
     <Content Include="Views\User\Register.aspx" />
     <Content Include="Views\User\SignIn.aspx" />
     <Content Include="Web.config" />

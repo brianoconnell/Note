@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Note.Core.Entities;
 
 namespace Note.Core.Repositories
@@ -6,5 +7,6 @@ namespace Note.Core.Repositories
     {
         User GetByUsername(string username);
         User GetByEmail(string email);
+        IList<User> GetAll();
     }
 }

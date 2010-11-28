@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
@@ -19,6 +21,11 @@ namespace Note.Core.Repositories
         public User GetByEmail(string email)
         {
             return session.Linq<User>().SingleOrDefault(user => user.Email == email);
+        }
+
+        public IList<User> GetAll()
+        {
+            return session.CreateCriteria<User>().List<User>();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
+using Note.Core.Repositories;
 using Note.Core.Services;
 using Note.ViewModels;
 
@@ -9,10 +10,11 @@ namespace Note.Controllers
     {
         private readonly IAuthenticationService authenticationService;
         private readonly IMembershipService membershipService;
-
-        public UserController(IAuthenticationService authenticationService, IMembershipService membershipService)
+        private readonly IUserRepository userRepository;
+        public UserController(IAuthenticationService authenticationService, IMembershipService membershipService, IUserRepository userRepository)
         {
             this.authenticationService = authenticationService;
+            this.userRepository = userRepository;
             this.membershipService = membershipService;
         }
 
@@ -73,6 +75,14 @@ namespace Note.Controllers
         {
             authenticationService.SignOut();
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult List()
+        {
+            var users = userRepository.GetAll();
+
+            return View("list", new ListUsersViewModel {Users = users});
         }
 
     }

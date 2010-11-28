@@ -13,6 +13,7 @@ namespace Note.Core.Infrastructure.Mappings
             Map(x => x.PasswordHash);
             Map(x => x.PasswordSalt);
             Map(x => x.Email);
+            HasMany(x => x.Notes).KeyColumn("OwnerId").Cascade.AllDeleteOrphan();
         }
     }
 }
